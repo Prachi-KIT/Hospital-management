@@ -1,0 +1,202 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Hospital.Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="css/fontawesome.css" rel="stylesheet" />
+    <style>
+        .main
+        {
+           margin-left:3%;
+           margin-right:86%;
+           background-color:white;
+        }
+        .Signup-box {
+            position: absolute;
+            height: 580px;
+            width: 674px;
+            color: black;
+            background: rgba(241, 246, 241, 0.80);
+            top: 21%;
+            left: 30%;
+        }
+
+
+       /*style for menus....start................... */
+        ul{
+                margin-top:2%;
+                padding:0px;
+                list-style:none;
+            }
+            ul li{
+               float:right;
+                width:150px;
+                height:40px;
+                background-color: black;
+                opacity: .8;
+                line-height: 40px;
+                text-align: center;
+                font-size: 15px;
+                margin-right: 30px;
+            }
+            ul li a{
+                text-decoration: none;
+                color:WHITE;
+                display: block;
+
+            }
+            ul li a:hover{
+                background-color: #60dd3c;
+            }
+           
+            ul li:hover ul li{
+                display:block;
+            }
+            #head1
+            {
+                position:relative;
+                height:65px;
+                width:1350px;
+                background-image:url('../images/m.jpg');background-repeat:repeat;
+                background-size:auto;
+            }
+
+            /*style for menus....Ending................... */
+
+
+            /*style for Popup................... */
+            .modal_back
+            {
+            background-color:darkgrey;
+            filter:alpha(opacity=90)!important;
+            opacity:0.6!important;
+            z-index:20;
+        }
+        .modal_popup 
+        {
+            padding:20px 0px 24px 10px;
+            position:relative;
+            width:450px;
+            height:66px;
+            background-color:white;
+            border:1px solid black;
+        }
+        
+        .footer_col
+        {
+         height:300px;
+         width:400px;
+         left:10px;
+        }
+       
+        
+
+        .auto-style1 {
+            position: absolute;
+            left: 40%;
+            top: 53px;
+        }
+        .auto-style2 {
+            position: absolute;
+            left: 40%;
+            top: 84px;
+        }
+        .auto-style3 {
+            position: absolute;
+            left: 40%;
+            top: 121px;
+        }
+        .auto-style4 {
+            position: absolute;
+            left: 40%;
+            top: 161px;
+        }
+       
+        
+
+    </style>
+   
+   
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table>
+               <tr>
+                    <td>
+                        
+                        <div id="head1">
+                               <ul>
+                                    <li><a href="Doctor_Registeration.aspx">Logout</a></li>
+                                    <li><a href="View_Appointment.aspx">View Your Appointment</a></li>
+                                    <li><a href="Doctor_Login.aspx">Login</a></li>
+                                    <li><a href="/index.html">Home</a></li>
+                              </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+               <td>
+
+                   <asp:ContentPlaceHolder ID="Web_Pages" runat="server">
+                   </asp:ContentPlaceHolder>
+
+               </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="height:500px;width:1300px;position:relative;">
+                            <div style="position:absolute;background-color:white;margin:50px;height:300px;width:1200px;">
+                               <table>
+                                   <tr>   
+                                       <td class="footer_col">
+                                           <div style="height:70px;width:270px;top:20px;position:absolute;left:30px;">
+                                               <img src="images/logo.png" height="40" width="210"/>
+                                               <br /><br /><br />                   
+                                               <asp:label id="Label5" runat="server" style="font-size:16px;" text="Locavore pork belly scen ester pine est chill wave"></asp:label>
+                                               <br />
+                                               <asp:label id="Label6" runat="server" style="font-size:16px;" Text="microdosing pop uple itarian cliche artisan."></asp:label>
+                                           </div>
+                                       </td>
+                                       <td class="footer_col">
+                                           <asp:Label ID="lbl1" runat="server" style="top:20px;font-size:16px;position:absolute;left:37%;" Text="CONTACT US" Font-Bold="True" Font-Names="Arial Rounded MT Bold"></asp:Label>
+                                           <br />
+                                           <asp:label id="lbl2" runat="server" style="font-size:16px;" class="auto-style1" Text="PO Box 16122 Collins Street West Victoria"></asp:label>
+                                           <br />
+                                           <asp:label id="lbl3" runat="server" style="font-size:20px;" class="auto-style2" Text="8007 Australia"></asp:label>
+                                           <br />
+                                           <asp:label id="lbl4" runat="server" style="font-size:large;" class="auto-style3" Text="nfo@gmail.com"></asp:label>
+                                           <br />
+                                           <asp:label id="lbl5" runat="server" style="font-size:large;" class="auto-style4" Text="(+1) 800 123 456"></asp:label>
+                                       </td>
+                                       
+                                       <td class="footer_col">
+                                           <asp:Label ID="Label2" runat="server" style="top:20px;font-size:16px;position:absolute;left:70%;" Text="SUBSCRIBE" Font-Bold="True" Font-Names="Arial Rounded MT Bold"></asp:Label>
+                                           <br />
+                                           <label id="Label4" runat="server" style="font-size:16px;font-family:Arial;position:absolute;left:70%;top:53px;">problems from our experts.</label>
+                                           <br />
+                                           <label id="Label3" runat="server" style="font-size:16px;position:absolute;left:70%;top:84px;" >Get healthy news, tip and solutions to your </label>
+                                           <br />
+                                           <asp:TextBox ID="txt1" runat="server" Height="31px" Width="252px" style="font-size:16px;font-family:Arial;position:absolute;left:70%;top:150px;" placeholder="Email Address"></asp:TextBox>
+                                           <asp:Button  ID="btn1" runat="server" text="send" style="font-size:16px;font-family:Arial;position:absolute;left:91%;top:150px;" Backcolor="#0033cc" ForeColor="White" Height="37px" Width="80"  />
+                                           </td>
+                                   </tr>
+                               </table>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fas fa-user-circle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="background-color:blue;height:70px;position:absolute;width:1200px;top:350px;left:50px;right:50px;color:white;">
+                               <H4 style="left:5%;position:absolute;">© 2018 Lifecare. All Rights Reserved.</H4>
+                            </div>
+                        </div>
+                        
+                    </td>
+               </tr>
+            </table>
+    </form>
+</body>
+</html>
