@@ -18,7 +18,7 @@ namespace Hospital
         {
             if (!IsPostBack)
             {
-                string cmdtxt = "select id,Patientname,Email,Gender,Age,Contactno,DOB,Marital_status,Address,Reg_date,UserType from Patient_Register";
+                string cmdtxt = "select p.patient_id,p.patientname,b.department,p.email,p.age,p.contactno,b.diease,b.fees,b.Reg_date,b.flag,b.query from Patient_Register p inner join Book_Appointment b on p.patient_id=b.Patient_id";
                 SqlConnection cn = new SqlConnection(connection_string);
                 cn.Open();
                 DataSet ds = new DataSet();

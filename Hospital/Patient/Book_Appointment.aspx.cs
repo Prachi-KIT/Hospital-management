@@ -9,17 +9,22 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Net.Mail;
 using System.Text;
+using System.Net;
+using System.IO;
+using System.Collections.Specialized;
 
 namespace Hospital
 {
     public partial class Book_Appointment : System.Web.UI.Page
     {
+        long tele;
+        string patient;
         string cmdtxt;
         int doctorid;
         string patient_id;
         string pat_email;
         string patient_nm;
-        int Int_PatientId;
+        string Int_PatientId;
         String connection_string = ConfigurationManager.ConnectionStrings["Hospital"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -64,28 +69,31 @@ namespace Hospital
             {
                 if (Page.IsValid)
                 {
-                    cmdtxt = "select Doc_id from doctor_register where ltrim(rtrim(Doctorname))=ltrim(rtrim('" + drp_doctors.SelectedItem + "'))";
+                    string cmdtxt1 = "";
+                    cmdtxt1 = "select id from doctor_register where ltrim(rtrim(Doctorname))=ltrim(rtrim('" + drp_doctors.SelectedItem + "'))";
                     SqlConnection c = new SqlConnection(connection_string);
                     c.Open();
-                    SqlCommand cmd = new SqlCommand(cmdtxt, c);
+                    SqlCommand cmd = new SqlCommand(cmdtxt1, c);
                     SqlDataReader r = cmd.ExecuteReader();
                     if (r.Read())
                     {
-                        doctorid = Convert.ToInt32(r["Doc_id"]);
+                        doctorid = Convert.ToInt32(r["id"].ToString());
                     }
                     else
                     {
                         Response.Write("<script>alert('Doctor is not Register')</script>");
                     }
 
-                    string cmdtxt1 = "select Patient_id from Patient_register where ltrim(rtrim(Email))=ltrim(rtrim('" + pat_email + "')) and id='" + patient_id + "'";
+                    string cmdtxt2 = "select Patient_id,id,contactno,Patientname from Patient_register where ltrim(rtrim(Email))=ltrim(rtrim('" + pat_email + "')) and Patient_id='" + patient_id + "'";
                     SqlConnection con = new SqlConnection(connection_string);
                     con.Open();
-                    SqlCommand comd = new SqlCommand(cmdtxt1, con);
+                    SqlCommand comd = new SqlCommand(cmdtxt2, con);
                     SqlDataReader r1 = comd.ExecuteReader();
                     if (r1.Read())
                     {
-                        Int_PatientId = Convert.ToInt32(r1["Patient_id"]);
+                        Int_PatientId = r1["Patient_id"].ToString();
+                        tele = Convert.ToInt64(r1["contactno"]);
+                        patient = r1["Patientname"].ToString();
                     }
                     else
                     {
@@ -93,21 +101,21 @@ namespace Hospital
                     }
 
 
-
+                    string query = txt_query.Text;
                     string flag = "Book";
                     string status = "Appointment is booked by " + patient_nm;
-                    cmdtxt = "insert into Book_Appointment values('" + Int_PatientId + "','" + doctorid + "','" + patient_nm + "','" + drp_doctors.SelectedItem + "','" + drp_department.SelectedItem + "','"+txt_fees.Text+"','" + drp_diease.SelectedItem + "','" + drp_room.SelectedItem + "','" + flag + "','" + status + "','" + pat_email + "','" + txt_Appointment_Dt.Text + "')";
+                    cmdtxt = "insert into Book_Appointment values('" + Int_PatientId + "','" + patient_nm + "','" + pat_email + "','" + doctorid + "','" + drp_doctors.SelectedItem + "','" + drp_department.SelectedItem + "','" + txt_fees.Text + "','" + drp_diease.SelectedItem + "','" + drp_room.SelectedItem + "','" + flag + "','" + status + "','" + txt_Appointment_Dt.Text + "','"+query+"')";
                     SqlConnection c1 = new SqlConnection(connection_string);
                     c1.Open();
                     SqlCommand cmd1 = new SqlCommand(cmdtxt, c1);
                     int chk = cmd1.ExecuteNonQuery();
                     if (chk > 0)
                     {
-                        if (pat_email != "")
+                        if (tele != 0)
                         {
-                            ////send....mail..regarding...book appointment by the patient.
-                            //  SendPasswordReset(pat_email, "1816510903@kit.ac.in", patient_nm);
-                            Response.Write("<script>alert('Appointment booked Sucessfully....')</script>");
+                            ////send message to register mobile no..
+                           string s= SendMessage(tele, patient);
+                            Response.Write("<script>alert('Appointment booked Sucessfully.... <br/><br/>')</script>");
                             clear_data();
                         }
 
@@ -116,47 +124,48 @@ namespace Hospital
                 }
             }
         }
-        private void SendPasswordReset(string ToEmail, string From, string name)
+        /*private void SendPasswordReset(string ToEmail,  string name)
+    {
+        try
         {
-            try
+
+            MailMessage msg = new MailMessage("1816510903@kit.ac.in", ToEmail);
+            StringBuilder Email_body = new StringBuilder();
+            Email_body.Append("Dear " + name + "  <br/><br/>");
+            Email_body.Append("Your Appointment is booked ..Thank u for visiting..");
+            Email_body.Append("<br/>");
+            Email_body.Append("We all wish for you good health...");
+            Email_body.Append("<br/><br/>");
+            msg.IsBodyHtml = true;
+            msg.Body = Email_body.ToString();
+
+            msg.Subject = "Appointment Book ..";
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+            smtp.Credentials = new System.Net.NetworkCredential()
             {
+                UserName = "1816510903@kit.ac.in",
+                Password = "1816510903"
+            };
 
-                MailMessage msg = new MailMessage(From, ToEmail);
-                StringBuilder Email_body = new StringBuilder();
-                Email_body.Append("Dear " + name + "  <br/><br/>");
-                Email_body.Append("Appointment is booked by you..Thank u for visiting..");
-                Email_body.Append("<br/>");
-                Email_body.Append("We all wish for you good health...");
-                Email_body.Append("<br/><br/>");
-                msg.IsBodyHtml = true;
-                msg.Body = Email_body.ToString();
-
-                msg.Subject = "Book Appointment..";
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-
-                smtp.Credentials = new System.Net.NetworkCredential()
-                {
-                    UserName = "1816510903@kit.ac.in",
-                    Password = "1816510903"
-                };
-
-                smtp.EnableSsl = true;
-                smtp.Send(msg);
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('There is some problem...  with mail security..')</script>");
-            }
+            smtp.EnableSsl = true;
+            smtp.Send(msg);
         }
+        catch (Exception ex)
+        {
+            Response.Write(ex.Message);
+            Response.Write("<script>alert('There is some problem...  with mail security..')</script>");
+        }
+    }*/
 
         protected void lnk_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Doctor/View_Appointment");
         }
 
-     protected void drp_doctors_SelectedIndexChanged(object sender, EventArgs e)
+        protected void drp_doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void drp_department_SelectedIndexChanged(object sender, EventArgs e)
@@ -172,13 +181,37 @@ namespace Hospital
                 drp_doctors.DataSource = ds;
                 drp_doctors.DataTextField = "Doctorname";
                 drp_doctors.DataBind();
-                txt_fees.Text=ds.Tables[0].Rows[0][1].ToString();
+                txt_fees.Text = ds.Tables[0].Rows[0][1].ToString();
             }
             catch (Exception exx)
             {
                 Response.Write("<script>alert('" + exx.Message.ToString() + "')</script>");
             }
         }
+
+        private string SendMessage(long patient_mob, string patientname)
+        {
+            try
+            {
+                string patientmob = patient_mob.ToString();
+                String message = HttpUtility.UrlEncode("This is a message from demo hospital dear  you have sucessfully book your appointment please take care of yourself ");
+                using (var wb = new WebClient())
+                {
+                    byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
+                {
+                {"apikey" , "lrVQ9cdOo4I-GRaZgzYPvz1h8YHcwZ7znYQAuPKGm7"},
+                {"numbers" , "916386018824"},
+                {"message" , message},
+                {"sender" , "TXTLCL"}
+                });
+                    string result = System.Text.Encoding.UTF8.GetString(response);
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                return " Response.Write(e.Message);";
+            }
+        }
     }
 }
-     

@@ -123,6 +123,15 @@ namespace Hospital
         protected global::System.Web.UI.WebControls.TextBox txt_amount;
 
         /// <summary>
+        /// Txt_feedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Txt_feedback;
+
+        /// <summary>
         /// btn_paybill control.
         /// </summary>
         /// <remarks>

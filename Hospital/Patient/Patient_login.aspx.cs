@@ -31,15 +31,15 @@ namespace Hospital
                 {
                     try
                     {
-                        string cmdtxt1 = "select usnm from sign_up where userType='PATIENT' and Pass='" + txt_pass.Text + "' and email='" + txt_pat_nm.Text + "'";
+                        string cmdtxt1 = "select name from sign_up where userType='PATIENT' and Pwd='" + txt_pass.Text + "' and email='" + txt_pat_nm.Text + "'";
                         SqlConnection cn1 = new SqlConnection(connection_string);
                         cn1.Open();
                         SqlCommand cmd1 = new SqlCommand(cmdtxt1, cn1);
                         SqlDataReader da1 = cmd1.ExecuteReader();
                         if (da1.Read())
                         {
-                            string Patient_Name = da1["usnm"].ToString();
-                            string cmdtxt = "select * from Login where userType='PATIENT' and Pass='" + txt_pass.Text + "' and Id_Type='" + txt_pat_id.Text + "' and email='" + txt_pat_nm.Text + "'";
+                            string Patient_Name = da1["name"].ToString();
+                            string cmdtxt = "select * from Login where userType='PATIENT' and Pwd='" + txt_pass.Text + "' and Id='" + txt_pat_id.Text + "' and email='" + txt_pat_nm.Text + "'";
                             SqlConnection cn = new SqlConnection(connection_string);
                             cn.Open();
                             SqlCommand cmd = new SqlCommand(cmdtxt, cn);

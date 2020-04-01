@@ -309,6 +309,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Doc_image\" />
     <Folder Include="images\neuro\" />
   </ItemGroup>
   <PropertyGroup>

@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Book Appointment...</title>
+    <meta charset="utf-8" />
     <style>
         .main-box {
             position: absolute;
@@ -86,8 +87,6 @@
                    </ul> 
             </div>
 
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager>
             <img src="../images/staff2.jpg" height="700" width="1450" />
             <div class="main-box">
                  <div><asp:Label ID="lbl1" runat="server" style="color:darkorange;font-size:23px;text-align:center;"></asp:Label></div>

@@ -27,7 +27,7 @@ namespace Hospital
             {
                 if (Page.IsValid)
                 {
-                    string cmdtxt = "select * from Login where userType='DOCTOR' and Pass='" + txt_pass.Text + "' and Email='" + txt_email.Text + "'";
+                    string cmdtxt = "select * from Login where id='"+txt_doc_id.Text+"' and Pwd='" + txt_pass.Text + "' and Email='" + txt_email.Text + "'";
                     SqlConnection cn = new SqlConnection(connection_string);
                     cn.Open();
                     SqlCommand cmd = new SqlCommand(cmdtxt, cn);
@@ -42,7 +42,7 @@ namespace Hospital
                     }
                     else
                     {
-                        Response.Write("<Script>Alert('Invalid User')</script>");
+                        Response.Write("<script>Alert('Invalid User')</script>");
                     }
 
                 }

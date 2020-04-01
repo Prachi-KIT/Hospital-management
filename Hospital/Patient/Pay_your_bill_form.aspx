@@ -6,13 +6,7 @@
 <head runat="server">
     <title>Pay Your bill Form</title>
      <style>
-        .main
-        {
-           margin-left:3%;
-           margin-right:86%;
-           background-color:white;
-        }
-        .auto-style1 {
+       .auto-style1 {
             width: 503px;
         }
         .Signup-box {
@@ -22,7 +16,7 @@
             color: black;
             background: rgba(241, 246, 241, 0.80);
             top: 21%;
-            left: 47%;
+            left: 44%;
             box-shadow:
                 inset 0 -3em 3em rgba(0,0,0,0.1),
                       0   0    0    rgba(0,0,0,0.1),
@@ -71,6 +65,14 @@
          /*style for menus....End................... */
  
 
+         .auto-style2 {
+             width: 505px;
+         }
+         .auto-style3 {
+             width: 570px;
+         }
+ 
+
     </style>
 </head>
 <body>
@@ -86,20 +88,26 @@
           <br />
               <img src="../images/Background5.jpg" height="1000" width="1450"/>
             <div class="Signup-box">
-                <br />
-                     <label for="l" style="margin-top:600px;font-size:x-large;color:#00ccff;"><center><b>Pay Your Bill Form</b></center></label>
-            <br /><br />
-               <div class="main">
-                    <table>
+              <br /><br />
+               <div>
+                    <table style="width:550px;margin:0px 20px;"> 
                               <tr>
-                                     <td>&nbsp;&nbsp;&nbsp; Patient Id<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_pat_id" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                                  <td colspan="2"> 
+                                      <label for="l" style="font-size:x-large;color:#00ccff;text-align:center;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pay Your Bill Form</b></label><br />
+                                 </td>
+                              </tr>
+                        <tr>
+                            <td><br /></td>
+                        </tr>
+                              <tr>
+                                     <td class="auto-style3">&nbsp;&nbsp;&nbsp; Patient Id<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_pat_id" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                      </td>
                                      <td>
                                          <label for="Lname" style="margin-left:10px;">Patient&nbsp; Name<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txt_Pat_nm" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                          </label></td>
                               </tr>     
                               <tr>
-                                    <td class="auto-style2">
+                                    <td class="auto-style3">
                                         <asp:TextBox ID="txt_pat_id" runat="server" Height="23px" style="margin-left: 10px" Width="250px" CssClass="Signup_textboxes" OnTextChanged="txt_pat_id_TextChanged" AutoPostBack="True"  ></asp:TextBox>
                                     </td>
                             
@@ -109,13 +117,13 @@
                           
                               </tr>
                               <tr>
-                                    <td><label for="email" style="margin-left:10px;">Doctor Name<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_docnm" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <td class="auto-style3"><label for="email" style="margin-left:10px;">Doctor Name<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_docnm" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                         </label></td>
                                     <td><label for="coun" style="margin-left:10px;">Disease Name<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txt_diease" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                         </label></td>
                               </tr>
                               <tr>
-                                    <td>
+                                    <td class="auto-style3">
                                         <asp:TextBox ID="txt_docnm" runat="server" Height="25px" style="margin-left: 10px" Width="250px" CssClass="Signup_textboxes" ></asp:TextBox>
                                     </td> 
                                     <td class="auto-style2">
@@ -123,7 +131,7 @@
                                    </td>
                               </tr>
                               <tr>
-                                    <td class="auto-style1">
+                                    <td class="auto-style3">
                                         <label for="mob" style="margin-left:10px;">Bill Amount<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txt_amount" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txt_amount" ErrorMessage="InValid Amount" ForeColor="Red" ValidationExpression="[0-9]{1,4}"></asp:RegularExpressionValidator>
                                         </label></td>
@@ -131,29 +139,31 @@
 
                               </tr>
                               <tr>
-                                    <td class="auto-style1">
-                                        <asp:TextBox ID="txt_amount" runat="server" Height="26px" style="margin-left: 10px" Width="250px" CssClass="Signup_textboxes" ></asp:TextBox>
+                                    <td class="auto-style3">
+                                        <asp:TextBox ID="txt_amount" runat="server" Height="26px" style="margin-left: 10px" Width="255px" CssClass="Signup_textboxes" ></asp:TextBox>
                                     </td>
                                     <td class="auto-style1">
                                         &nbsp;</td>
 
                               </tr>
                               <tr>
-                                    <td class="auto-style1">
-                                        &nbsp;</td>
-                                    <td class="auto-style1">
-                                        &nbsp;</td>
+                                    <td class="auto-style3" colspan="2">
+                                       <label for="mob" style="margin-left:10px;">Enter Your Feedback.....</label>
+                                    </td>  
                               </tr>
+                              <tr>
+                                    <td class="auto-style3" colspan="2">
+                                        <asp:TextBox ID="Txt_feedback" runat="server" Height="26px" style="margin-left: 10px" Width="520px" CssClass="Signup_textboxes"  placeholder="For Example -- Good,Excellent,Bad..."></asp:TextBox>
+                                    </td>  
+                              </tr>
+                        <tr>
+                            <td><br /></td>
+                        </tr>
+                                <tr>
+                                  <td colspan="2"><asp:Button ID="btn_paybill" runat="server" BackColor="#00ccff" ForeColor="#FFFFCC" Height="34px" Width="520px" style="margin-left: 10px" Text="Pay Bill" OnClick="btn_paybill_Click" /></td>
+                                </tr>
                               </table>
                     <br />
-                    <table>
-                        <tr>
-                          <td><asp:Button ID="btn_paybill" runat="server" BackColor="#00ccff" ForeColor="#FFFFCC" Height="34px" Width="520px" style="margin-left: 9px" Text="Pay Bill" OnClick="btn_paybill_Click" /></td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
-
-                        </tr>
-                    </table>
                     <br />
                  </div>
                 </div>

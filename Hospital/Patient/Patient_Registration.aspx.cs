@@ -25,14 +25,14 @@ namespace Hospital.Patient
                 
             }
             
-            cmdtxt = "select patient_id from Patient_Register order by patient_id desc";
+            cmdtxt = "select id from Patient_Register order by patient_id desc";
             SqlConnection cn = new SqlConnection(connection_string);
             cn.Open();
             SqlCommand cmd = new SqlCommand(cmdtxt, cn);
             SqlDataReader da = cmd.ExecuteReader();
             if (da.Read())
             {
-                id = Convert.ToInt32(da["Patient_id"]) + 1;
+                id = Convert.ToInt32(da["id"]) + 1;
             }
             else
             {
@@ -93,8 +93,10 @@ namespace Hospital.Patient
                             {
                                 try
                                 {
+                                    string cmdtxt;
+                                    long tele = Convert.ToInt64(txt_tele.Text);
                                     string f = "getdate()";
-                                    string cmdtxt = "insert into Patient_Register values('" + txt_pname.Text + "','" + txt_email.Text + "','" + txt_pass.Text + "','" + drp_gender.SelectedItem.Text + "','" + txt_age.Text + "','" + txt_tele.Text + "','" + txt_Dob.Text + "','" + drp_maristatus.SelectedItem.Text + "','" + txt_add.Text + "'," + dt + ",'PATIENT','" + txt_pid.Text + "')";
+                                   cmdtxt = "insert into Patient_Register values('" + txt_pname.Text + "','" + txt_email.Text + "','" + txt_pass.Text + "','" + drp_gender.SelectedItem.Text + "','" + txt_age.Text + "'," + tele + ",'" + txt_Dob.Text + "','" + drp_maristatus.SelectedItem.Text + "','" + txt_add.Text + "'," + dt + ",'PATIENT','" + txt_pid.Text + "')";
                                     using (SqlCommand cmd = new SqlCommand(cmdtxt, cn, tran))
                                     {
                                         chk = cmd.ExecuteNonQuery();

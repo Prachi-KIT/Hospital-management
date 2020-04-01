@@ -36,7 +36,7 @@ namespace Hospital
                 ///....check..Patient Id is valid or not....
                 try
                 {
-                    string cmdtxt = "select Patient_id from Patient_register where ltrim(rtrim(id))=ltrim(rtrim('" + txt_pat_id.Text + "'))";
+                    string cmdtxt = "select Patient_id,id from Patient_register where ltrim(rtrim(patient_id))=ltrim(rtrim('" + txt_pat_id.Text + "'))";
                     SqlConnection cn = new SqlConnection(connection_string1);
                     cn.Open();
                     SqlCommand cmd = new SqlCommand(cmdtxt, cn);
@@ -45,16 +45,16 @@ namespace Hospital
                     {
                         //If Patient Id is valid...then retreive related information from Book Appointment...
 
-                        string cmdtxt1 = "select * from Book_Appointment where ltrim(rtrim(Pat_id))=ltrim(rtrim('" + da["Patient_id"].ToString() + "'))";
+                        string cmdtxt1 = "select * from Book_Appointment where ltrim(rtrim(Patient_id))=ltrim(rtrim('" + da["Patient_id"].ToString() + "'))";
                         SqlConnection cn1 = new SqlConnection(connection_string1);
                         cn1.Open();
                         SqlCommand cmd1 = new SqlCommand(cmdtxt1, cn1);
                         SqlDataReader da1 = cmd1.ExecuteReader();
                         if (da1.Read())
                         {
-                            txt_Pat_nm.Text = da1["patientname"].ToString();
-                            txt_docnm.Text = da1["doctorname"].ToString();
-                            txt_diease.Text = da1["Dieasename"].ToString();
+                            txt_Pat_nm.Text = da1["patientnm"].ToString();
+                            txt_docnm.Text = da1["doctornm"].ToString();
+                            txt_diease.Text = da1["Diease"].ToString();
                         }
                         else
                         {
@@ -91,7 +91,7 @@ namespace Hospital
                 {
                     try
                     {
-                        string cmdtxt1 = "select Patient_id from Patient_register where ltrim(rtrim(id))=ltrim(rtrim('" + txt_pat_id.Text + "'))";
+                        string cmdtxt1 = "select Patient_id from Patient_register where ltrim(rtrim(patient_id))=ltrim(rtrim('" + txt_pat_id.Text + "'))";
                         SqlConnection cn1 = new SqlConnection(connection_string1);
                         cn1.Open();
                         SqlCommand cmd1 = new SqlCommand(cmdtxt1, cn1);
@@ -114,7 +114,7 @@ namespace Hospital
                         {
                             ///Write twice..this code due..to postback...
 
-                            string cmdtxt1 = "select * from Book_Appointment where ltrim(rtrim(Pat_id))=ltrim(rtrim('" + pat_id + "'))";
+                            string cmdtxt1 = "select * from Book_Appointment where ltrim(rtrim(Patient_id))=ltrim(rtrim('" + pat_id + "'))";
                             SqlConnection cn1 = new SqlConnection(connection_string1);
                             cn1.Open();
                             SqlCommand cmd1 = new SqlCommand(cmdtxt1, cn1);
@@ -122,21 +122,21 @@ namespace Hospital
                             if (da1.Read())
                             {
 
-                                doctorid = da1["Doc_id"].ToString();
+                                doctorid = da1["Doctor_id"].ToString();
                                 flag = "PAID";
                                 status = "Paid By the Patient";
                                 appointmentid = Convert.ToInt32(da1["Id"]);
 
                                 ///inserted data into....Pay your bill table....
 
-                                string cmdtxt2 = "insert into Pay_Your_Bill values('" + pat_id + "','" + txt_Pat_nm.Text + "','" + doctorid + "','" + txt_docnm.Text + "','" + txt_diease.Text + "','" + txt_amount.Text + "','" + flag + "','" + status + "','" + "kuch bi" + "','" + System.DateTime.Today +"','" + appointmentid + "','')";
+                                string cmdtxt2 = "insert into Pay_Your_Bill values('" + pat_id + "','" + txt_Pat_nm.Text + "','" + doctorid + "','" + txt_docnm.Text + "','" + txt_diease.Text + "','" + txt_amount.Text + "','" + flag + "','" + status + "','" + System.DateTime.Today +"')";
                                 SqlConnection cn = new SqlConnection(connection_string1);
                                 cn.Open();
                                 SqlCommand cmd = new SqlCommand(cmdtxt2, cn);
                                 int chk = cmd.ExecuteNonQuery();
                                 if (chk > 0)
                                 {
-                                    string query = "update Book_Appointment set flag='" + flag + "',status='" + status + "' where ltrim(rtrim(pat_id))=ltrim(rtrim('" + pat_id + "')) ";
+                                    string query = "update Book_Appointment set flag='" + flag + "',status='" + status + "' where ltrim(rtrim(patient_id))=ltrim(rtrim('" + pat_id + "')) ";
                                     cn.Close();
                                     cn.Open();
                                     SqlCommand cmd_q = new SqlCommand(query, cn);

@@ -7,13 +7,7 @@
 <head runat="server">
     <title>Doctor Registration Form.</title>
     <style>
-        .main
-        {
-           height:500px;
-           width:800px;
-           background:rgba(0,0,0,0.3);
-           position:fixed;
-        }
+       
         .auto-style1 {
             width: 503px;
         }
@@ -24,6 +18,7 @@
             color: black;
             top: 21%;
             left: 30%;
+            background:rgba(240, 249, 270,0.7);
         }
 
 
@@ -103,21 +98,20 @@
                         <li><a href="/index.html">Home</a></li>
                   </ul>
             </div>
-          <div class="main">
+          <div>
           <div style="height:auto;width:1450px">
           <br />
               <img src="../images/a.jpg" height="1000" width="1450"/>
             <div class="Signup-box">
                 <br />
                      <label for="l" style="margin-top:600px;font-size:x-large;color:blue;"><center><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Doctor Registration Form</b></center>
-                <br />
-                </label>
+                     </label>
             <br /><br />
                <div style="height: 436px; width: 639px">
                     <table>
                               <tr>
                                      <td>
-                                         <label for="Fname" style="margin-left:10px;">Doctor Id</label>
+                                         <label for="Fname" style="margin-left:15px;">Doctor Id</label>
 
                                      </td>
                                      <td>
@@ -238,7 +232,7 @@
                               </tr>     
                               <tr>
                                     <td colspan="2">
-                                        <asp:TextBox ID="txt_address" runat="server" Height="62px" style="margin-left: 10px" Width="611px" CssClass="Signup_textboxes" TextMode="MultiLine" ></asp:TextBox>
+                                        <asp:TextBox ID="txt_address" runat="server" Height="62px" style="margin-left: 10px" Width="624px" CssClass="Signup_textboxes" TextMode="MultiLine" ></asp:TextBox>
                                     </td>
    
                               </tr>

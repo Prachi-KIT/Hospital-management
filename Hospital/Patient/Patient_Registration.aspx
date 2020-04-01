@@ -8,7 +8,11 @@
     <style>
         body{
             background-image:url("../images/a.jpg");
+            background-repeat:no-repeat;
             background-size:cover;
+            margin:0px;
+            padding: 0px;
+            box-sizing: border-box;
         }
         .main
         {
@@ -19,24 +23,25 @@
         .auto-style1 {
             width: 503px;
         }
+
         .Signup-box {
             position: absolute;
-            height: 580px;
+            height: 520px;
             width: 620px;
             color: black;
-            background: rgba(241, 246, 241, 0.80);
+            background: rgba(240, 249, 270,0.7);
             top: 21%;
             left: 30%;
         }
-        #head1
-            {
-                position:fixed;
-                height:55px;
-                width:100%;
-                margin-top:0px;
-                background-image:url('../images/m.jpg');background-repeat:repeat;
-                background-size:auto;
-            }
+        #head1 {
+            position: fixed;
+            height: 55px;
+            width: 100%;
+            margin-top: 0px;
+            background-image: url('../images/m.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+        }
 
 
          /*style for menus....start................... */
@@ -112,7 +117,7 @@ ul li:hover ul li{
                            </ul>
                         </li>
                         <li><a href="Patient_R.aspx">Logout</a></li>
-                       <li><a href="Pay_your_bill_form.aspx">Pay Bill</a></li>
+                      <!-- <li><a href="Pay_your_bill_form.aspx">Pay Bill</a></li>!-->
                       
                        <li><a href="Patient_login.aspx">Login</a></li>
                       
@@ -122,10 +127,9 @@ ul li:hover ul li{
           <div style="height:auto;width:1450px">
           <br />
                   <div class="Signup-box">
-                <br />
-                     <h2 style="text-align-last:center;color:blue;">Patient Registration Form</h2>
+                      <h2 style="text-align-last:center;color:blue;">Patient Registration Form</h2>
            
-               <div class="main">
+               <div>
                     <table>
                               <tr>
                                      <td>&nbsp;&nbsp; Patient Id</td>
@@ -227,9 +231,6 @@ ul li:hover ul li{
                     <table>
                         <tr>
                           <td>&nbsp;<asp:Button ID="signup" runat="server" BackColor="blue" ForeColor="#FFFFCC" Height="34px" Width="575px" style="margin-left: 9px" Text="Register" OnClick="signup_Click" /></td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
-
                         </tr>
                     </table>
                     <br />
