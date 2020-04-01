@@ -1,4 +1,5 @@
 
+imp note 
 code for mvayooo-----
 
 string strUrl =  "http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=gprachi251@gmail.com:1234567&senderID=TEST SMS&receipientno=918090373183&msgtxt=This is a test from mVaayoo API&state=4"; 
